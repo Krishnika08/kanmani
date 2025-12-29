@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Express Your Feelings</title>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+/* 🌈 Animated Gradient Background */
+body {
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #667eea, #764ba2, #6a11cb, #2575fc);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(10px);
+}
+
+.nav-link {
+    position: relative;
+    margin-left: 15px;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: 0;
+    bottom: -5px;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Content */
+.content-area {
+    margin-top: 100px;
+}
+
+/* Card Animation */
+.card {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    transform: translateY(30px);
+    opacity: 0;
+    animation: fadeSlide 0.8s ease forwards;
+}
+
+@keyframes fadeSlide {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Image Animation */
+.card img {
+    height: 220px;
+    object-fit: cover;
+    transform: scale(1.1);
+    animation: zoomIn 1s ease forwards;
+}
+
+@keyframes zoomIn {
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Hover Effect */
+.card:hover {
+    transform: translateY(-8px) scale(1.01);
+    transition: transform 0.4s ease;
+}
+
+/* Text */
+.card-title {
+    color: #6a11cb;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1.1rem;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+<div class="container">
+    <a class="navbar-brand fw-bold" href="#">My Feelings</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showCard('happy')">Happy</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showCard('sad')">Sad</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showCard('love')">Love</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showCard('angry')">Angry</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showCard('motivated')">Motivated</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showCard('grateful')">Grateful</a></li>
+        </ul>
+    </div>
+</div>
+</nav>
+
+<!-- Content -->
+<div class="container content-area">
+<div class="row justify-content-center">
+<div class="col-md-6">
+
+    <div id="messageCard" class="card d-none text-center">
+        <img id="cardImage" src="" alt="Feeling image">
+        <div class="card-body p-4">
+            <h3 id="cardTitle" class="card-title"></h3>
+            <p id="cardMessage" class="card-text mt-3"></p>
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+
+<!-- JS -->
+<script>
+function showCard(feeling) {
+    const card = document.getElementById("messageCard");
+    const title = document.getElementById("cardTitle");
+    const message = document.getElementById("cardMessage");
+    const image = document.getElementById("cardImage");
+
+    // Reset animation
+    card.classList.add("d-none");
+    card.style.animation = "none";
+    void card.offsetWidth;
+    card.style.animation = null;
+
+    card.classList.remove("d-none");
+
+    if (feeling === "happy") {
+        title.innerText = "Feeling Happy 😊";
+        message.innerText = "Happiness fills my heart and makes life beautiful.";
+        image.src = "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee";
+    } else if (feeling === "sad") {
+        title.innerText = "Feeling Sad 😔";
+        message.innerText = "It's okay to feel sad sometimes. Healing takes time.";
+        image.src = "https://images.unsplash.com/photo-1500673922987-e212871fec22";
+    } else if (feeling === "love") {
+        title.innerText = "Feeling Love ❤️";
+        message.innerText = "Love brings warmth and meaning to life.";
+        image.src = "https://images.unsplash.com/photo-1517841905240-472988babdf9";
+    } else if (feeling === "angry") {
+        title.innerText = "Feeling Angry 😠";
+        message.innerText = "Calmness helps us grow stronger.";
+        image.src = "https://images.unsplash.com/photo-1494173853739-c21f58b16055";
+    } else if (feeling === "motivated") {
+        title.innerText = "Feeling Motivated 💪";
+        message.innerText = "Focused, strong, and ready to achieve goals.";
+        image.src = "https://images.unsplash.com/photo-1508780709619-79562169bc64";
+    } else if (feeling === "grateful") {
+        title.innerText = "Feeling Grateful 🙏";
+        message.innerText = "Gratitude turns what we have into enough.";
+        image.src = "https://images.unsplash.com/photo-1502082553048-f009c37129b9";
+    }
+}
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
